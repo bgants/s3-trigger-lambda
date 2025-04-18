@@ -1,4 +1,6 @@
 
+An example of using a composition pattern to create a stack
+
 # Create virtual env
 To manually create a virtualenv on MacOS and Linux:
 
@@ -49,6 +51,8 @@ All CDK commands are available, this project uses a Makefile. See Makefile for d
 * `make synth`      emits the synthesized CloudFormation template
 * `make deploy`     deploy this stack to your default AWS account/region
 * `make destroy`    destroy this stack
+
+The S3 bucket must be empty to successfully destroy this stack.
 
 ### CDK commands
 
