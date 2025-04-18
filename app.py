@@ -5,24 +5,21 @@ import aws_cdk as cdk
 
 from s3_trigger_lambda.s3_trigger_lambda_stack import S3TriggerLambdaStack
 
+"""
+    This CDK app is an example of using a composition pattern to create a stack
+    that contains an S3 bucket and a Lambda function.
+    The S3 bucket is used to trigger the Lambda function when an object is created.   
+"""
+
+# Set up environment variables
+account = os.getenv("AWS_ACCOUNT_ID")
+primary_region = os.getenv("AWS_PRIMARY_REGION")
+domain_name = os.getenv("AWS_DOMAIN_NAME", "default-domain-name")
+
+primary_environment = cdk.Environment(account=account, region=primary_region)
 
 app = cdk.App()
-S3TriggerLambdaStack(app, "S3TriggerLambdaStack",
-    # If you don't specify 'env', this stack will be environment-agnostic.
-    # Account/Region-dependent features and context lookups will not work,
-    # but a single synthesized template can be deployed anywhere.
-
-    # Uncomment the next line to specialize this stack for the AWS Account
-    # and Region that are implied by the current CLI configuration.
-
-    #env=cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION')),
-
-    # Uncomment the next line if you know exactly what Account and Region you
-    # want to deploy the stack to. */
-
-    #env=cdk.Environment(account='123456789012', region='us-east-1'),
-
-    # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
-    )
-
+S3TriggerLambdaStack(
+    app, "S3TriggerLambdaStack", domain_name=domain_name, env=primary_environment
+)
 app.synth()
