@@ -17,12 +17,18 @@ import aws_cdk as cdk
 class S3TriggerLambdaStack(Stack):
 
     def __init__(
-        self, scope: Construct, construct_id: str, domain_name: str, **kwargs
+        self,
+        scope: Construct,
+        construct_id: str,
+        domain_name: str,
+        **kwargs
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         # Create custom construct for S3 bucket with Lambda trigger
-        bucket_lambda = BucketWithLambda(self, "BucketWithLambda", domain_name)
+        bucket_lambda = BucketWithLambda(
+            self, "BucketWithLambda", domain_name
+        )
 
         # Output the bucket name
         self.output_bucket_name = cdk.CfnOutput(

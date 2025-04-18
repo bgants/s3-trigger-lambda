@@ -35,7 +35,7 @@ command.
 Open up the env.sh file and modify, then source the file to set the environment.
 
 ```
-$ source ./env,sh
+$ source ./env.sh
 ```
 
 ## Useful commands
@@ -52,7 +52,8 @@ All CDK commands are available, this project uses a Makefile. See Makefile for d
 * `make deploy`     deploy this stack to your default AWS account/region
 * `make destroy`    destroy this stack
 
-The S3 bucket must be empty to successfully destroy this stack.
+Note, the S3 bucket must be empty to successfully destroy this stack. The bucket is created
+with "auto_delete_objects=True" so that should empty the bucket but it may not be what you want.
 
 ### CDK commands
 

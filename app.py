@@ -20,6 +20,9 @@ primary_environment = cdk.Environment(account=account, region=primary_region)
 
 app = cdk.App()
 S3TriggerLambdaStack(
-    app, "S3TriggerLambdaStack", domain_name=domain_name, env=primary_environment
+    app,
+    "S3TriggerLambdaStack",
+    domain_name=domain_name,
+    env=primary_environment,
 )
 app.synth()

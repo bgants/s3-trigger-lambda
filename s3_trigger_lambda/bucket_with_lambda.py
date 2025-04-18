@@ -12,8 +12,12 @@ import aws_cdk as cdk
 """
     This CDK stack creates an S3 bucket and a Lambda function that is triggered
 """
+
+
 class BucketWithLambda(Construct):
-    def __init__(self, scope: Construct, id: str, domain_name: str) -> None:
+    def __init__(
+        self, scope: Construct, id: str, domain_name: str
+    ) -> None:
         super().__init__(scope, id)
 
         # Get the account ID from the stack
@@ -22,8 +26,11 @@ class BucketWithLambda(Construct):
         # Create an S3 bucket
         self.bucket = s3.Bucket(
             self,
-            f"s3-trigger-bucket-{account_id}",
+            "S3TriggerLambdaBucket",  # Provide a unique id for the bucket
+            bucket_name=f"s3-trigger-lambda-{account_id}",
             removal_policy=cdk.RemovalPolicy.DESTROY,
+            # Could be dangerous in production, but useful for testing
+            auto_delete_objects=True,
         )
 
         power_tools_layer = LambdaPowertoolsLayer(self, "PowerToolsLayer")
